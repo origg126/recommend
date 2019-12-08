@@ -1,0 +1,25 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /recommend
+    jsp:
+      init-parameters:
+        development: true
+
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/recommend?characterEncoding=utf8&serverTimezone=Hongkong&useSSL=false
+mybatis:
+  type-aliases-package: com.cfh.recommend.entity
+  mapper-locations: classpath:com/cfh/recommend/mapper/*Mapper.xml
+logging:
+  level:
+    com.cfh.recommend.dao: debug
