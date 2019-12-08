@@ -1,10 +1,5 @@
 package com.cfh.recommend.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,10 +9,6 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2019/12/8 14:54
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
 @Table(name = "userlike")
 public class UserLike implements Serializable {
     @Column(name = "userId")
@@ -26,4 +17,73 @@ public class UserLike implements Serializable {
     private String videoId;
     private Double count;
     private Video video;
+
+    @Override
+    public String toString() {
+        return "UserLike{" +
+                "userId='" + userId + '\'' +
+                ", videoId='" + videoId + '\'' +
+                ", count=" + count +
+                ", video=" + video +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UserLike userLike = (UserLike) o;
+
+        if (!videoId.equals(userLike.videoId)){
+            return false;
+        }
+        if (!count.equals(userLike.count)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + videoId.hashCode();
+        result = 31 * result + count.hashCode();
+        return result;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
+
+    public Double getCount() {
+        return count;
+    }
+
+    public void setCount(Double count) {
+        this.count = count;
+    }
+
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
+    }
 }
