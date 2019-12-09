@@ -2,7 +2,7 @@ package com.cfh.recommend.service;
 
 import com.cfh.recommend.entity.Video;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author origg
@@ -16,5 +16,5 @@ public interface UserLikeService {
      * @param userId
      * @return
      */
-    List<Video> findUserLike(String userId);
+    Map<Video, Double> findUserLike(String userId);
 }

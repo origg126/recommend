@@ -30,7 +30,7 @@ public class UserLikeServiceImpl implements UserLikeService {
     private VideoService videoService;
 
     @Override
-    public List<Video> findUserLike(String userId) {
+    public Map<Video, Double> findUserLike(String userId) {
         //此处可以根据标签挑选用户
         List<User> users = userService.queryAll();
         //此处可以用户标签挑选热门视频
@@ -81,7 +81,7 @@ public class UserLikeServiceImpl implements UserLikeService {
         mark.forEach((k,v)->{
             System.out.println("video:" + k.getName() + "----mark:" + v);
         });
-        return null;
+        return mark;
     }
 
     /**
@@ -106,6 +106,7 @@ public class UserLikeServiceImpl implements UserLikeService {
                 }
             }
             sumDown += Math.abs(neighborUser.get(user));
+
         }
         return targetUserAvg + (sumUp / sumDown);
     }

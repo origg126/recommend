@@ -12,11 +12,13 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 根据id查询一个用户
-     * @param userId
+     * 登陆
+     * @param username
+     * @param password
      * @return
      */
-    User queryOne(String userId);
+    User queryOne(String username,String password);
+
 
     /**
      * 根据id查询一个用户，并查询该用户的喜好
