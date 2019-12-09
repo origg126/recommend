@@ -1,6 +1,8 @@
 package com.cfh.recommend.controller;
 
 import com.cfh.recommend.entity.User;
+import com.cfh.recommend.entity.UserLike;
+import com.cfh.recommend.service.UserLikeService;
 import com.cfh.recommend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserLikeService userLikeService;
 
     @RequestMapping("login")
     public Map<String, Object> login(String username, String password, HttpServletRequest request) {
@@ -32,6 +36,31 @@ public class UserController {
         }else{
             map.put("status", -200);
             map.put("message", "用户名或密码错误");
+        }
+        return map;
+    }
+
+    @RequestMapping("changeUserLike")
+    public Map<String, Object> changeUserLike(String userId,String videoId,Double score) {
+        Map<String, Object> map = new HashMap<>(2);
+        try {
+            UserLike userLike = userService.queryOneUserLike(userId, videoId);
+            if (userLike == null) {
+                userLike = new UserLike();
+                userLike.setUserId(userId);
+                userLike.setVideoId(videoId);
+                userLike.setCount(score);
+                userService.insertUserLike(userLike);
+            }else{
+                userLike.setCount(score);
+                userService.updateUserLike(userLike);
+            }
+            map.put("status", 200);
+            map.put("message", "修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status", -200);
+            map.put("message", "修改失败");
         }
         return map;
     }

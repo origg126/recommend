@@ -1,6 +1,7 @@
 package com.cfh.recommend.service;
 
 import com.cfh.recommend.entity.User;
+import com.cfh.recommend.entity.UserLike;
 
 import java.util.List;
 
@@ -18,6 +19,26 @@ public interface UserService {
      * @return
      */
     User queryOne(String username,String password);
+
+    /**
+     * 根据用户id和videoId联合查询一个userLike
+     * @param userId
+     * @param videoId
+     * @return
+     */
+    UserLike queryOneUserLike(String userId, String videoId);
+
+    /**
+     * 更新一个UserLike
+     * @param userLike
+     */
+    void updateUserLike(UserLike userLike);
+
+    /**
+     * 添加一个UserLike
+     * @param userLike
+     */
+    void insertUserLike(UserLike userLike);
 
 
     /**

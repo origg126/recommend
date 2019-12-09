@@ -2,6 +2,7 @@ package com.cfh.recommend.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,7 @@ public class UserLike implements Serializable {
     @Column(name = "videoId")
     private String videoId;
     private Double count;
+    @Transient
     private Video video;
 
     @Override
